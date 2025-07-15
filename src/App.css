@@ -69,6 +69,11 @@ h1 + h3 {
     text-align: center;
 }
 
+/* used in all Tab components */
+.tab-pane > *:not(.nav-tabs) {
+    margin-bottom: 0.5rem;
+}
+
 /* used in workflows_view.tsx, mdx_template_view.tsx, job_view.tsx  */
 .address {
     text-align: center;
@@ -189,9 +194,11 @@ h1 + h3 {
 }
 
 /* photo_input.tsx */
+.photo-input .card-body .accordion {
+    margin-bottom: 0.5rem;
+}
 .input-card {
     page-break-before: always;
-    margin-bottom: 1rem;
 } /*also in radio.tsx*/
 
 /* stylizes the hidden input for photo upload*/
@@ -202,8 +209,6 @@ h1 + h3 {
 /* photo.tsx */
 .photo-card {
     break-inside: avoid;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
 }
 
 .photo-card > .card-body > div {
@@ -473,6 +478,51 @@ btn-light:hover {
     font-size: 18px; /* Adjust the default font size */
 }
 
+/* Collapsible text card */
+.collapsible-text {
+    position: relative;
+    background-color: white;
+}
+
+.collapsible-text p.description {
+    color: gray;
+    margin-bottom: unset;
+}
+
+.collapsible-text.collapsed {
+    height: 3.125rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.collapsible-text .clickable-text {
+    color: #006100;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: white;
+    padding: 0 5px 0px 5px;
+}
+
+.collapsible-text .clickable-text.collapsed {
+    position: absolute;
+    background-color: white;
+    bottom: 2px;
+    right: 0px;
+}
+
+.collapsible-text-container .content {
+    margin-top: 10px;
+}
+
+.collapsible-text-container .content .card {
+    border: none;
+    margin-bottom: 0;
+}
+
+.collapsible-text-container .content .card-body {
+    padding: 0;
+}
+
 /* Common font size for medium, small, and extra small devices */
 @media (max-width: 991.98px) {
     .modal-body-text {
@@ -500,4 +550,12 @@ btn-light:hover {
         display: block;
         page-break-before: always;
     }
+}
+
+.print-wrapper > .photo-card {
+    margin-bottom: 0.5rem;
+}
+
+.project-form > * {
+    margin-bottom: 0.5rem;
 }
