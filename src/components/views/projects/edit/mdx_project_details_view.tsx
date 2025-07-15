@@ -7,7 +7,7 @@ import MdxWrapper from '../../../mdx_wrapper'
 import useEditableProject from '../../../../hooks/useEditableProject'
 import { useProject } from '../../../../providers/project_provider'
 import StoreProvider from '../../../../providers/store_provider'
-import DOEProjectDetailsTemplate from '../../../../templates/doe_project_details.mdx'
+import DOEProjectDetailsTemplate from '../../../../templates/project_details.mdx'
 import { hasErrors } from '../../../../utilities/validation_utils'
 
 type MdxProjectViewProps = Record<string, never>

@@ -7,7 +7,7 @@ import DocNameInputWrapper from '../../shared/doc_name_input_wrapper'
 import MdxWrapper from '../../../mdx_wrapper'
 import { useDatabase } from '../../../../providers/database_provider'
 import StoreProvider from '../../../../providers/store_provider'
-import DOEProjectDetailsTemplate from '../../../../templates/doe_project_details.mdx'
+import DOEProjectDetailsTemplate from '../../../../templates/project_details.mdx'
 import { type Project } from '../../../../types/database.types'
 import { type Installer } from '../../../../types/installer.type'
 import {
