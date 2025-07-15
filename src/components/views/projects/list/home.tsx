@@ -62,7 +62,7 @@ const Home: React.FC<HomeProps> = () => {
                             <br />
                             to easily take photos and document
                             <br />
-                            your entire installation project.
+                            your entire project.
                             <br />
                             <br />
                             <br />
@@ -70,7 +70,6 @@ const Home: React.FC<HomeProps> = () => {
                             <br />
                             For your clients.
                             <br />
-                            For quality assurance reporting.
                         </p>
                         <br />
                         <div className="button-container-center">
