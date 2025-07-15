@@ -8,121 +8,231 @@ import LabelValueExamplesStyles from './labelValueExamples/LabelValueExamplesSty
     # Playground
 
     <Tabs>
-    <Tab eventKey="label-value-section" title="<LabelValue/> Examples" >
-        <div className="label-value-section">
-            <nav>
-                <ul>
-                    <a href="#text-examples">Text Value Examples</a>
-                    <a href="#number-examples">Number Value Examples</a>
-                    <a href="#date-examples">Date Value Examples</a>
-                    <a href="#other-examples">Other Examples</a>
-                    <a href="#">Back to Top</a>
-                </ul>
-            </nav>
-            <section id="text-examples" >
-                <TextLabelValues />
-            </section>
-            <section id="number-examples">
-                <NumberLabelValues />
-            </section>
-            <section id="date-examples">
-                <DateLabelValues />
-            </section>
-            <section id="other-examples">
-                <OtherExamples />
-            </section>
-        </div>
-    </Tab>
+
         <Tab eventKey="components-example-section" title="Component Examples">
-            <Button className="mb-3" variant="primary" href={process.env.REACT_APP_HOMEPAGE} rel="noopener noreferrer" target="_blank">
-            <span>Button</span>
-            </Button>
+            ## Form Input Components
 
-    <Checkbox options={['Option 1', 'Option 2', 'Option 3']} path="check_box" />
+            ### Text Input Components
+            <StringInput
+                label="Full Name"
+                path="document.name"
+                hint="Enter your full name"
+                required
+            />
 
-            <ClimateZoneSelect label="ClimateZoneSelect" path="climate_zone_select" />
+            <TextInput
+                label="Project Description"
+                path="document.description"
+                multiline
+                hint="Describe the project in detail"
+            />
 
-    <Collapsible header="Collapsible">Collapsible</Collapsible>
+            ### Numeric Input
+            <NumberInput
+                label="Temperature"
+                path="document.temperature"
+                min={0}
+                max={100}
+                suffix="°F"
+                hint="Enter temperature reading"
+            />
 
-    <CollapsibleTextContainer
-        title="Title Time"
-        text="This is a description that is very long so we only show two lines of it then add a see more. Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos. Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos."
-    >
-        <div style={{ backgroundColor: "pink", height: "200px" }}>WE CAN PUT ANYTHING HERE</div>
-    </CollapsibleTextContainer>
+            ### Date Input
+            <DateInput
+                label="Installation Date"
+                path="document.install_date"
+                hint="Select the date of installation"
+            />
 
-    <CollapsibleTextContainer
-        title="Title Time"
-        text="This is a description that is very long so we only show two lines of it then add a see more. Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos. Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos."
-    >
-        <Radio label="Do you like this card?" options={['Yes', 'No']} path="radio" />
-    </CollapsibleTextContainer>
+            ### Selection Components
+            <Select
+                label="Project Status"
+                options={["Planning", "In Progress", "Completed", "On Hold"]}
+                path="document.status"
+                hint="Select current project status"
+            />
 
-    <CollapsibleTextContainer
-        title="Title Time"
-        text="This is a description that is very long so we only show two lines of it then add a see more. Lorem ipsum dolor sit amet consectetur adipiscing elit. Ad litora torquent per conubia nostra inceptos himenaeos."
-    >
-        <Radio label="Do you like this card?" options={['Yes', 'No']} path="radio" />
-    </CollapsibleTextContainer>
-    <CollapsibleTextContainer
-        title="No content"
-        text="This is a description that is very long so we only show two lines of it then add a see more. Lorem ipsum dolor sit amet consectetur adipiscing elit. Ad litora torquent per conubia nostra inceptos himenaeos."
-    />
-    <CollapsibleTextContainer
-    title={<div style={{ backgroundColor: "pink", height: "200px" }}>React.Node Title Example</div>}
-    text={<div style={{ padding: "10px", height: "200px" }}>This is an example of a React.Node instead of a string being passed. It was requested to change the acceptable text param type to a React.Node instead of a string. There is less control of the styling when we allow this. The &quot;..see more&quot;/&quot;...show less&quot; buttons cease to function because we can&apos;t gauge the length of text (if there is any text at all in the React.Node). Lorem ipsum dolor sit amet consectetur adipiscing elit. Ad litora torquent per conubia nostra inceptos himenaeos.</div>}
-    />
-    <CollapsibleTextContainer text="This is shorter than 75 chars." title="Title Town!">
-        <Radio label="Do you like this card?" options={['Yes', 'No']} path="radio" />
-    </CollapsibleTextContainer>
-    <h2>Collapsible Text Component without Card Wrapper and Styling:</h2>
-    <CollapsibleText text="This is a description that is very long so we only show two lines of it then add a see more. Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos. Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos."/>
+            <Checkbox
+                label="Required Documentation"
+                options={[
+                    "Building Permits",
+                    "Equipment Specifications",
+                    "Installation Manual",
+                    "Warranty Information"
+                ]}
+                path="document.documentation"
+                hint="Select all applicable documents"
+            />
 
-    <DateInput label="DateInput" path="date_input" />
-    **DateStr:** <DateStr date={props.data.date_input}/>
+            <Radio
+                label="Installation Type"
+                options={["New Installation", "Replacement", "Upgrade"]}
+                path="document.install_type"
+                hint="Select the type of installation"
+            />
 
-            **DateTimeStr:** <DateTimeStr date={props.data.date_input}/>
+            <USStateSelect
+                label="Project Location"
+                path="document.state"
+                hint="Select the state where the project is located"
+            />
 
-            <Figure src="/logo192.png" />
+            <ClimateZoneSelect
+                label="Climate Zone"
+                path="document.climate_zone"
+                hint="Select the applicable climate zone"
+            />
 
-            <FileInput id="file_input" label="File Input">
-                FileInput
+            ## File and Media Components
+
+            <FileInput
+                id="specs_doc"
+                label="Equipment Specifications"
+                hint="Upload equipment specification document (PDF)"
+            >
+                Upload specification document
             </FileInput>
 
-            <LabelValue label="LabelValue" path="doc_name" parent={props.project} />
-
-            <NumberInput label="NumberInput" min={0} max={100} path="number_input" suffix="%" />
-
-            <PhotoInput id="photo_input" label="PhotoInput">
-                PhotoInput
+            <PhotoInput
+                id="install_photo"
+                label="Installation Photo"
+                uploadable
+                hint="Upload a photo of the completed installation"
+            >
+                Take or upload a photo of the installed equipment
             </PhotoInput>
 
-            <Photo id="photo_input" />
+            <Photo
+                id="install_photo"
+                label="Installation Photo"
+                required
+            >
+                Photo of completed installation
+            </Photo>
 
-            <Radio label="Radio" options={['Yes', 'No']} path="radio" />
+            <PDFRenderer
+                id="specs_doc"
+                label="Specifications Document"
+            />
 
-            <Select label="Select" options={['Yes', 'No']} path="select" />
+            ## Layout and Structure Components
 
-            <StringInput label="StringInput" path="string_input" />
+            <Collapsible header="Equipment Details">
+                <StringInput label="Manufacturer" path="document.manufacturer" />
+                <StringInput label="Model Number" path="document.model" />
+                <NumberInput label="Capacity" path="document.capacity" suffix=" BTU" />
+            </Collapsible>
 
-            <TextInput label="TextInput" path="text_input" />
+            <CollapsibleTextContainer title="Installation Notes">
+                <TextInput
+                    label="Notes"
+                    path="document.notes"
+                    multiline
+                    hint="Enter any additional installation notes"
+                />
+            </CollapsibleTextContainer>
 
-            <USStateSelect label="USStateSelect" path="us_state_select" />
+            <PrintSection label="Equipment Report">
+                <h3>Equipment Information</h3>
+                <LabelValue label="Manufacturer" path="document.manufacturer" />
+                <LabelValue label="Model" path="document.model" />
+                <LabelValue label="Installation Date" path="document.install_date" />
+            </PrintSection>
 
-            ## TODO
+            <PageBreak />
 
-            -   GpsCoordStr
-            -   LocationStr
-            -   PDFRenderer
-            -   PageBreak
-            -   Photo
-            -   PrintSection
-            -   Repeatable
-            -   RepeatableInput
-            -   ShowOrHide
-            -   Tab
-            -   Tabs
-            -   Table
+            <ShowOrHide show={true}>
+                <h4>Previous Equipment Details</h4>
+                <StringInput label="Previous Model" path="document.previous_model" />
+                <DateInput label="Original Install Date" path="document.original_date" />
+            </ShowOrHide>
+
+            <Repeatable path="document.measurements">
+
+                        <NumberInput
+                            label="Temperature Reading"
+                            path='temperature_reading'
+                            suffix="°F"
+                        />
+                        <DateTimeStr datetime={new Date().toISOString()} />
+
+            </Repeatable>
+
+            <Table
+                headers={["Time", "Temperature", "Humidity"]}
+                rows={[
+                    ["09:00 AM", "72°F", "45%"],
+                    ["12:00 PM", "78°F", "42%"],
+                    ["03:00 PM", "80°F", "40%"]
+                ]}
+            />
+
+            <Figure
+                caption=" Site Overview"
+            >
+                <img src="/images/site_overview.jpg" alt="Installation site overview" />
+            </Figure>
+
+        </Tab>
+         <Tab eventKey="label-value-section" title="<LabelValue/> Examples" >
+            <div className="label-value-section">
+                <nav>
+                    <ul>
+                        <a href="#text-examples">Text Value Examples</a>
+                        <a href="#number-examples">Number Value Examples</a>
+                        <a href="#date-examples">Date Value Examples</a>
+                        <a href="#other-examples">Other Examples</a>
+                        <a href="#">Back to Top</a>
+                    </ul>
+                </nav>
+                <section id="text-examples" >
+                    <TextLabelValues />
+                </section>
+                <section id="number-examples">
+                    <NumberLabelValues />
+                </section>
+                <section id="date-examples">
+                    <DateLabelValues />
+                </section>
+                <section id="other-examples">
+                    <OtherExamples />
+                </section>
+            </div>
+        </Tab>
+        <Tab eventKey="report" title="Report">
+            <PrintSection label="Print Report">
+                <h2>Project Overview</h2>
+                <LabelValue path="document.name" label="Project Name"/>
+                <LabelValue path="document.install_date" label="Installation Date"/>
+                <LabelValue path="document.climate_zone" label="Climate Zone"/>
+
+                <h3>Equipment Details</h3>
+                <LabelValue path="document.manufacturer" label="Manufacturer"/>
+                <LabelValue path="document.model" label="Model Number"/>
+
+                <h3>Site Information</h3>
+                <LabelValue path="document.state" label="State"/>
+
+                <h3>Documentation</h3>
+                <Photo id="install_photo" label="Installation Photo" />
+                <PDFRenderer id="specs_doc" label="Equipment Specifications" />
+
+                ## Data Display Components
+
+                <LabelValue
+                    label="Project Name"
+                    value="Sample"
+                />
+
+                <DateStr date={new Date().toISOString()} />
+
+                <DateTimeStr datetime={new Date().toISOString()} />
+
+
+
+
+
+            </PrintSection>
         </Tab>
     </Tabs>
 

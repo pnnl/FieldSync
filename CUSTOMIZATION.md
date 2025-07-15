@@ -1,8 +1,8 @@
-Please see [README.md](README.md) to set the basic configuration parameters, prior to customizing your instance of Quality Install Tool.
+Please see [README.md](README.md) to set the basic configuration parameters, prior to customizing your instance of FieldSync.
 
-# Quality Install Tool Customization
+# FieldSync Customization
 
-Although the Quality Install Tool (QIT) functions properly without configuration, you may wish to make additional customizations. Most require simple configuration changes, not JavaScript/TypeScript coding.
+FieldSync is a base repository for building and customizing data collection workflows. Although it functions properly without configuration, you may wish to make additional customizations. Most require simple configuration changes, not JavaScript/TypeScript coding.
 
 ## Level Zero
 
@@ -49,6 +49,10 @@ const TEMPLATES: Record<string, TemplateConfiguration> = {
     // ...
 }
 ```
+
+### Components
+
+FieldSync provides a rich set of reusable components in the `src/components/` directory. These components can be used within your MDX templates to create interactive forms and displays. For detailed component documentation and examples, see the [Components Reference](README.md#mdx-components-reference) in the README.
 
 ### Environment Variables
 

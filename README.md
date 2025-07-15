@@ -1,234 +1,315 @@
-*This repository is set up for GitHub Pages, and you're welcome to fork it for reuse or customization.*
+# FieldSync
 
-# Quality Install Tool
+FieldSync is the base repository used for building and customizing data collection workflows for the [Quality Install Tool (QI Tool)](https://github.com/pnnl/Quality-Install-Tool). It supports MDX-based workflow templates and local data storage through PouchDB. This repository is configured for GitHub Pages deployment, and you're welcome to fork it for reuse or customization.
 
-## An outline of the App startup process
-1. The server will serve the built (by webpack) version of `index.html` for any route.
-2. `index.html` will load `index.css` and `App.css`.
-3. `index.html` will load `App.js` and will place our top-level
-React component, `<App />`, on the page.
-4. `App.tsx` defines the routes used by React Router.
-5. The routes of the form `/app/<database name>/:docId` use the `MdxTemplateView` component to render the templates from `src/templates` and connect them to the database. `src/templates/templates_config.ts` provides a mapping from database name to the template `title` and the template as a React component.
+---
 
-## Installing dependencies
-When installing dependencies, using `yarn install --frozen-lock` is prefered over `yarn install` to ensure that the install does not update any packages and cause dependency issues.
+## App Startup Overview
 
-## Development server
-The `yarn run start` command launches a server on localhost:3000. The browser view will automatically update whenever any file within the `src` folder is modified and saved.
+1. The server serves the Webpack-built `index.html` for any route.
+2. `index.html` loads global styles from `index.css` and `App.css`.
+3. `App.js` mounts the root-level React component `<App />`.
+4. `App.tsx` defines the app's route configuration using React Router.
+5. Routes like `/app/<database name>/:docId` use the `MdxTemplateView` to render templates from `src/templates`, mapped via `templates_config.ts`.
 
-You must rerun `yarn run start` in order to see the effect of any changes made to files outside of the `src` folder. This comes up if you make configuration changes in `config` or you change the resources in `public`.
+---
 
-## Serving the production build
-The `yarn run build` command generates a production build that is stored in the  
-`/build` folder. This can be served as a static web site.
+## Installation Instructions
 
-Use `npx http-server-spa ./build` from the top-level project folder
-to serve the static files locally at `localhost:8080`. This
-serves `/build/index.html` for all routes (those without file extensions) and the
-files within `./build/public/` for all other paths.
+Use the following command to install dependencies:
 
-## linting and formatting
-The `yarn lint` command runs a linter to ensure all code is to the formatting standards for the repo before
-a pull request is made.
+```bash
+yarn install --frozen-lockfile
+```
 
-The command `yarn lint:fix` can be used to automatically fix any linting or formatting errors that can be fixed.
+This ensures package versions are not updated unexpectedly.
 
+---
+
+## Development Server
+
+To run the development server:
+
+```bash
+yarn start
+```
+
+- Launches on `http://localhost:3000`
+- Automatically reloads on changes inside `src/`
+- To reflect changes in `public/` or `config/`, restart the dev server
+
+---
+
+## Production Build
+
+To create a production build:
+
+```bash
+yarn build
+```
+
+To serve the static build locally:
+
+```bash
+npx http-server-spa ./build
+```
+
+- This serves on `http://localhost:8080`
+- Supports client-side routing via SPA fallback to `index.html`
+
+---
+
+## Linting and Formatting
+
+- Run `yarn lint` to check for formatting issues
+- Run `yarn lint:fix` to auto-fix common issues
+
+---
 
 ## Creating a New Workflow Template
 
-Here's a step-by-step walkthrough on creating a new workflow template:
+### 1. Add a New `.mdx` Template
 
-1. ### Workflow Template using MDX:
+Create a file in:
 
-This process involves a combination of Markdown content and reusable React components, leading to the creation of dynamic and printable reports. [More about MDX](https://mdxjs.com/).
+```
+src/templates/<TEMPLATE_NAME>.mdx
+```
 
-Utilize the directory **src/template/<TEMPLATE_NAME>.mdx** as the destination for locating and storing new template files.
+Use `Tabs` and `Tab` components to organize content. For example:
 
-In this codebase, reports are generated using the 'Tabs' and 'Tab' components to create a tabbed interface. For example:
-
-```HTML
----
-EXAMPLE MDX
----
-
+```jsx
 <Tabs>
-  <!-- Input Components: Project and installation details -->
-  <Tab eventKey="KEY" title="Project">
-    RELATED_CONTENT
-    <ProjectInfoInputs {...props} />    
+  <Tab eventKey="Project" title="Project">
+    <ProjectInfoInputs {...props} />
   </Tab>
-  <Tab eventKey="KEY" title="Assessment">
-    ## HEADING
-    RELATED_CONTENT
+  <Tab eventKey="Assessment" title="Assessment">
+    ## Assessment Heading
   </Tab>
-  .
-  .
-  .
-  <!-- Report Components: Components to generate the printable report -->
-  <Tab eventKey="KEY" title="Report">
+  <Tab eventKey="Report" title="Report">
     <PrintSection>
-    CONTENT_TO_INLCUDE_IN_PRINTABLE_REPORT
+      Printable content here
     </PrintSection>
   </Tab>
 </Tabs>
 ```
 
-Information regarding the reusable React components accessible within this codebase is provided in the section below [Short codes for the MDX templates](#short-codes-for-the-MDX-template).
+### 2. Register Template in `index.ts`
 
-2. ### Configuration File:
+In `src/templates/index.ts`:
 
-To add a new template, make use of the **src/templates/index.ts** file. 
+```ts
+import MyTemplate from './my_template.mdx';
 
-a. **Import the New Template:**
-```typescript
-import WorkflowHPWHTemplate from './hpwh_workflow.mdx'
-// other imports
+export const templates = {
+  my_template: {
+    title: 'My Custom Template',
+    template: MyTemplate,
+  },
+  // ...other templates
+};
 ```
 
-b. **Define a Template:**
-In the configuration file, create an entry for the new template. Specify its name, title, and reference the imported template file.
-
-```typescript
-template_name: {
-  title: 'TITLE OF THE TEMPLATE',
-  template: 'IMPORTED TEMPLATE FILE',
-}
-
-// For example:
-hpwh_workflow: {
-  title: 'Heat Pump Water Heater',
-  template: WorkflowHPWHTemplate,
-}
-```
+---
 
 ## Data Storage
-Data from this app will be stored on the client's device using 'PouchDB,' a JavaScript database library designed for local data storage and synchronization. PouchDB uses IndexedDB as the storage backend. [More about PouchDB](https://pouchdb.com/guides/databases.html).
 
-Please note that data stored in this way may be lost if the user clears their browser cache.
+FieldSync uses [PouchDB](https://pouchdb.com/guides/databases.html) for local storage on the client's browser (backed by IndexedDB). Data may be lost if the browser cache is cleared.
 
+---
 
-## Short codes for the MDX templates
+## MDX Components Reference
 
-To avoid the template writter needing to import React components, a set of
-components are automatically imported into the templates as *MDX shortcodes*.
-This happens in the `MdxWrapper` component.
+Templates automatically import reusable components via the `MdxWrapper`. Below are the available components:
 
-Reusable components include properties (props) that pass relevant data to meet specific needs. The usage of these props can vary depending on the specific React components used. The commonly used props are as follows:
+### Form Input Components
 
-- '`label'`: Used for providing labels or titles for components.
-- `'path'`: Used to specify a variable path for storing data. Examples include "location" and "installation.location."
-- `'id'`: Assigned as a unique identifier to specific components, particularly used as a reference for storing photo and file attachments in the database.
-- `'hint'`: Used to provide additional information or guidance to users about the input.
-
-### Input Components:
-
-Input components are designed to collect and aggregate data for the quality installation report.
-
-### Collapsible
-Wrap the content to be shown/hidden: The content will toggle between being shown and hidden on clicking. The `'header'` prop is specific to this component and displays the title.
-```HTML
-<Collapsible header="HEADER">
-  CONTENT_TO_BE_SHOWN_OR_HIDDEN
-</Collapsible>
+- **StringInput / TextInput**
+```jsx
+<StringInput label="Name" path="document.name" hint="Enter full name" />
+<TextInput label="Notes" path="document.notes" multiline />
 ```
 
-### DateInput
-A calendar date input component.
-
-```HTML
-<DateInput label="INPUT_LABEL" path="DOCUMENT_PATH" />
+- **NumberInput**
+```jsx
+<NumberInput label="Label" min={0} max={100} path="document.value" />
 ```
 
-### Figure
+- **DateInput**
+```jsx
+<DateInput label="Label" path="document.date" />
+```
 
-This is a component for displaying a figure. The `'src'` prop is specific to this component and is used to specify the source (URL) of an image.
+- **Select**
+```jsx
+<Select label="Choose option" options={["A", "B"]} path="document.choice" />
+```
 
-```HTML
-<Figure src="IMAGE_SRC">
-  FIGURE_CAPTION
+- **Checkbox**
+```jsx
+<Checkbox label="Enable feature" path="document.enabled" />
+```
+
+- **Radio**
+```jsx
+<Radio label="Options" options={["Yes", "No"]} path="document.choice" />
+```
+
+- **USStateSelect**
+```jsx
+<USStateSelect label="State" path="document.state" />
+```
+
+- **ClimateZoneSelect**
+```jsx
+<ClimateZoneSelect label="Climate Zone" path="document.zone" />
+```
+
+### File and Media Components
+
+- **FileInput**
+```jsx
+<FileInput id="file-id" label="Attach PDF">Upload supporting document</FileInput>
+```
+
+- **PhotoInput**
+```jsx
+<PhotoInput id="photo-id" label="Upload Photo" uploadable>Photo description</PhotoInput>
+```
+
+- **Photo** (for displaying)
+```jsx
+<Photo id="photo-id" label="Installed Unit" required>Before installation</Photo>
+```
+
+- **PDFRenderer**
+```jsx
+<PDFRenderer id="pdf-id" label="Document Viewer" />
+```
+
+### Layout and Structure Components
+
+- **Collapsible**
+```jsx
+<Collapsible header="Section Title">Content</Collapsible>
+```
+
+- **CollapsibleText**
+```jsx
+<CollapsibleText header="Details">Expandable text content</CollapsibleText>
+```
+
+- **CollapsibleTextContainer**
+```jsx
+<CollapsibleTextContainer>
+  <CollapsibleText header="Section 1">Content 1</CollapsibleText>
+  <CollapsibleText header="Section 2">Content 2</CollapsibleText>
+</CollapsibleTextContainer>
+```
+
+- **PrintSection**
+```jsx
+<PrintSection label="Print Report">Report Content</PrintSection>
+```
+
+- **PageBreak**
+```jsx
+<PageBreak />
+```
+
+- **ShowOrHide**
+```jsx
+<ShowOrHide show={condition}>Conditional content</ShowOrHide>
+```
+
+- **Repeatable**
+```jsx
+<Repeatable path="document.items">
+  {(itemPath) => (
+    <StringInput label="Item" path={`${itemPath}.name`} />
+  )}
+</Repeatable>
+```
+
+- **Table**
+```jsx
+<Table headers={["Name", "Value"]} rows={data} />
+```
+
+### Data Display Components
+
+- **LabelValue**
+```jsx
+<LabelValue label="Field" value="Content" />
+```
+
+- **DateStr**
+```jsx
+<DateStr date={timestamp} />
+```
+
+- **DateTimeStr**
+```jsx
+<DateTimeStr datetime={timestamp} />
+```
+
+- **LocationStr**
+```jsx
+<LocationStr location={locationObject} />
+```
+
+- **GPSCoordStr**
+```jsx
+<GPSCoordStr coordinates={coordinatesObject} />
+```
+
+- **Figure**
+```jsx
+<Figure caption="Image description">
+  <img src="path/to/image.jpg" alt="Description" />
 </Figure>
 ```
 
-### NumberInput
+### Project Components
 
-A number input component. The props `'min'` and `'max'` are be used for setting minimum and maximum allowable values for the number input. Defaulted to POSITIVE_INFINITY and POSITIVE_INFINITY respectively.
-
-```HTML
-<NumberInput label="INPUT_LABEL" hint="HINT" min="min" max="max" />
-```
-
-### PhotoInput
-This component allows users to take or upload photos. It currently supports only the JPEG image format. When the 'uploadable' prop is enabled, users can upload photos. If this prop is not enabled, the component allows only the use of the camera to take photos on mobile devices.
-```HTML
-<PhotoInput id="ATTACHMENT_ID" label="PHOTO_LABEL" uploadable>
-  PHOTO_DESCRIPTION
-</PhotoInput>
-```
-
-### Select
-A select input component with selectable options in dropdown.
-```HTML
-<Select label="INPUT_LABEL" options={["OPTION_1", "OPTION_2"]} path="DOCUMENT_PATH" />
-```
-
-### StringInput
-A string input component
-```HTML
-<StringInput label="INPUT_LABEL" path="DOCUMENT_PATH" hint="HINT" />
-```
-
-### TextInput
-A textarea input component for multiline text input.
-```HTML
-<TextInput label="INPUT_LABEL" path="DOCUMENT_PATH" />
-```
-
-### USStateSelect
-A select input with the 50 U.S. States preloaded as options
-```HTML
-<USStateSelect label="INPUT_LABEL" path="DOCUMENT_PATH" />
-```
-
-### FileInput
-A PDF file input component
-```HTML
-<FileInput id="ATTACHMENT_ID" label="FILE_INPUT_LABEL">
-  PRINTABLE_CONTENT
-</FileInput>
-```
-
-### ProjectInfoInputs
-Wraps inputs components to capture information about the project site and inspecting company details in a document.
-
-```HTML
+- **ProjectInfoInputs**
+```jsx
 <ProjectInfoInputs {...props} />
 ```
 
-### Report Components:
-
-Report components are designed to render and display content intended for reporting and printing.
-
-### PrintSection
-PRINTABLE_CONTENT placed within this component is designated for printing.
-
-```HTML
-<PrintSection label="PRINT_BUTTON_TEXT">
-  PRINTABLE_CONTENT
-</PrintSection>
+- **InstallationSelect**
+```jsx
+<InstallationSelect label="Select Installation" path="document.installation" />
 ```
 
-### Photo
-This component displays photos within the report section, formatted for printing.
+---
 
-```HTML
-<Photo id="ATTACHMENT_ID" label="PHOTO_LABEL" required>
-  PHOTO_DESCRIPTION
-</Photo>
-```
+## Component Props
 
-### PDFRenderer
-A PDF rendering component for displaying PDF documents content. Uses `'id'` to retrieve uploaded PDF and render its content in the web page.
+Most components support these common props:
+- `label`: Display label for the component
+- `path`: Data path for form inputs (e.g., "document.fieldName")
+- `hint`: Helper text shown below the component
+- `required`: Whether the field is required
+- `disabled`: Whether the component is disabled
+- `className`: Custom CSS classes
+- `id`: Unique identifier (required for file/photo components)
 
-```HTML
-<PDFRenderer id="ATTACHMENT_ID" label="FILE_LABEL" />
-```
+---
+
+## Notes
+
+- The MDX system allows combining Markdown content with React components
+- All inputs automatically sync with PouchDB through the document path
+- File and photo components use `id`-based referencing for local storage
+- Use `PrintSection` to mark content for PDF generation
+- The `Repeatable` component helps create dynamic form arrays
+- Wrapper components (e.g., `select_wrapper.tsx`) provide additional functionality to base components
+
+---
+
+For more information, see:
+- MDX documentation: [https://mdxjs.com](https://mdxjs.com)
+- PouchDB documentation: [https://pouchdb.com/guides/](https://pouchdb.com/guides/)
+
+To contribute or customize this tool, fork this repo and deploy using GitHub Pages or your preferred static hosting.
