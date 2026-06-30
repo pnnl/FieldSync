@@ -1,3 +1,8 @@
+> [!IMPORTANT]
+> This repository has been archived and is no longer maintained.
+> The code is provided for historical reference and may contain unpatched or unknown vulnerabilities.
+> It should not be used in production systems.
+
 # FieldSync
 
 FieldSync is the base repository used for building and customizing data collection workflows for the [Quality Install Tool (QI Tool)](https://github.com/pnnl/Quality-Install-Tool). It supports MDX-based workflow templates and local data storage through PouchDB. This repository is configured for GitHub Pages deployment, and you're welcome to fork it for reuse or customization.
